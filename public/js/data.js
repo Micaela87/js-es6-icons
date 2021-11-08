@@ -6,10 +6,14 @@ Ciascuna icona ha una proprietà “color”: utilizzare questa proprietà per v
 */
 
 // DOM nodes
+const formOptions = document.querySelectorAll('select');
+
 const iconsContainer = document.querySelector('.container');
 
+console.log(formOptions);
+
 // data to be displayed
-[
+const icons = [
 	{
 		name: 'cat',
 		prefix: 'fa-',
@@ -122,20 +126,38 @@ const iconsContainer = document.querySelector('.container');
 		family: 'fas',
 		color: 'blue'
 	}
-].forEach((icon) => {
-	const faIcon = generateIcon(icon);
-	iconsContainer.innerHTML += faIcon;
-	}
+];
 
-	
-)
+formOptions.forEach(function(n) {
+	n.addEventListener('change', function() {
+		console.log('you selected me');
+		if (n.value === 'all') {
+			icons.forEach(icon => generateIcon(icon))
+		} else {
+			const filteredIcons = filterIcons(n.value);
+
+			filteredIcons.forEach(icon => generateIcon(icon));
+		}
+})
+})
 
 // helper functions
+
+// generates icons
 function generateIcon(obj) {
 	const htmlString = `
-	<div>
+	<div class='icon-container'>
 		<i style='color:${obj.color}' class="${obj.family} ${obj.prefix}${obj.name}"></i>
+		<span>${obj.name.toUpperCase()}</span>
 	</div>
 	`;
-	return htmlString;
+	
+	iconsContainer.innerHTML += htmlString;
+}
+
+// filters icons by type
+function filterIcons(type) {
+	const filteredIcons = icons.filter((icon) => icon.type === type);
+
+	return filteredIcons;
 }
