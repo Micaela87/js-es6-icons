@@ -10,8 +10,6 @@ const formOptions = document.querySelectorAll('select');
 
 const iconsContainer = document.querySelector('.container');
 
-console.log(formOptions);
-
 // data to be displayed
 const icons = [
 	{
@@ -132,14 +130,15 @@ formOptions.forEach(function(n) {
 	n.addEventListener('change', function() {
 		console.log('you selected me');
 		if (n.value === 'all') {
-			icons.forEach(icon => generateIcon(icon))
+			icons.forEach((icon) => generateIcon(icon));
 		} else {
 			const filteredIcons = filterIcons(n.value);
-
-			filteredIcons.forEach(icon => generateIcon(icon));
+			filteredIcons.forEach((icon) => generateIcon(icon));
 		}
+	})
 })
-})
+
+
 
 // helper functions
 
@@ -151,7 +150,6 @@ function generateIcon(obj) {
 		<span>${obj.name.toUpperCase()}</span>
 	</div>
 	`;
-	
 	iconsContainer.innerHTML += htmlString;
 }
 

@@ -4,3 +4,55 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 10px;
+}
+
+h1 {
+    padding: 1.5rem 2rem;
+    font-size: 2rem;
+}
+
+.form-container {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: #29b1dd;
+}
+
+label {
+    font-size: 1.2rem;
+    padding: 0 2rem;
+    color: white;
+}
+
+option {
+    font-family: 'Roboto', sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+    height: fit-content;
+    background-color: #dddddd;
+}
+
+.icon-container {
+    font-size: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 10px 5px 5px #a2a2a2;
+    padding: 1.5rem 0;
+    width: calc(100% / 5);
+    margin: 2rem 1rem;
+    text-align: center;
+
+}
+
+.icon-container span {
+    display: block;
+    font-size: 1rem;
+    margin-top: 0.2rem;
+}
