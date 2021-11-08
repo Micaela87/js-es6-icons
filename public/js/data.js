@@ -126,19 +126,24 @@ const icons = [
 	}
 ];
 
+
+
 formOptions.forEach(function(n) {
 	n.addEventListener('change', function() {
 		console.log('you selected me');
+		console.log(n);
 		if (n.value === 'all') {
 			icons.forEach((icon) => generateIcon(icon));
+			arrFormattedIcons = [];
 		} else {
 			const filteredIcons = filterIcons(n.value);
 			filteredIcons.forEach((icon) => generateIcon(icon));
+			arrFormattedIcons = [];
 		}
 	})
 })
 
-
+let arrFormattedIcons = [];
 
 // helper functions
 
@@ -150,7 +155,11 @@ function generateIcon(obj) {
 		<span>${obj.name.toUpperCase()}</span>
 	</div>
 	`;
-	iconsContainer.innerHTML += htmlString;
+	arrFormattedIcons.push(htmlString);
+
+	const finalResult = arrFormattedIcons.join('');
+
+	iconsContainer.innerHTML = finalResult;
 }
 
 // filters icons by type
