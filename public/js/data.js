@@ -8,7 +8,7 @@ Ciascuna icona ha una proprietà “color”: utilizzare questa proprietà per v
 // DOM nodes
 const formOptions = document.querySelectorAll('select'); // dropdown menu
 const iconsContainer = document.querySelector('.container'); // icons' container
-let arrFormattedIcons = []; // empty icon HTML elements collection
+let arrFormattedIcons = []; // empty icon HTML collection
 
 // data to be displayed
 const icons = [
@@ -128,30 +128,26 @@ const icons = [
 
 // displays all icons when loading the page
 icons.forEach((icon) => generateIcon(icon));
-displayIcons(arrFormattedIcons);
-arrFormattedIcons = [];
+displayIcons();
 
 // adds event on dropdown menu options to filter icons to be displayed
 formOptions.forEach(function(n) {
 	n.addEventListener('change', function() {
-		console.log('you selected me');
 		console.log(n);
 		if (this.value === 'all') {
 			icons.forEach((icon) => generateIcon(icon));
-			displayIcons(arrFormattedIcons);
-			arrFormattedIcons = [];
+			displayIcons();
 		} else {
 			const filteredIcons = filterIcons(this.value);
 			filteredIcons.forEach((icon) => generateIcon(icon));
-			displayIcons(arrFormattedIcons);
-			arrFormattedIcons = [];
+			displayIcons();
 		}
 	});
 });
 
 // helper functions
 
-// generates and displays icons
+// generates icons
 function generateIcon(obj) {
 	// creates an HTML string
 	const htmlString = `
@@ -161,17 +157,20 @@ function generateIcon(obj) {
 	</div>
 	`;
 
-	// pushes the string previously created to the general collection above
+	// pushes the string previously created to the icons collection above
 	arrFormattedIcons.push(htmlString);
 }
 
 // displays icons on page
-function displayIcons(arr) {
+function displayIcons() {
 	// turns all the elements of the collection in a single string
-	const stringFormattedIcons = arr.join('');
+	const stringFormattedIcons = arrFormattedIcons.join('');
 
 	// prints icons in the collection to the page
 	iconsContainer.innerHTML = stringFormattedIcons;
+
+	// empties the icons collection to prevent icons to be displayed when not selected
+	arrFormattedIcons = [];
 }
 
 // filters icons by type
