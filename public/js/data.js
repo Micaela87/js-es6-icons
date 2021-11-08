@@ -138,7 +138,7 @@ formOptions.forEach(function(n) {
 			icons.forEach((icon) => generateIcon(icon));
 			displayIcons();
 		} else {
-			const filteredIcons = filterIcons(this.value);
+			const filteredIcons = icons.filter((icon) => icon.type === this.value);
 			filteredIcons.forEach((icon) => generateIcon(icon));
 			displayIcons();
 		}
@@ -171,11 +171,4 @@ function displayIcons() {
 
 	// empties the icons collection to prevent icons to be displayed when not selected
 	arrFormattedIcons = [];
-}
-
-// filters icons by type
-function filterIcons(type) {
-	const filteredIcons = icons.filter((icon) => icon.type === type);
-
-	return filteredIcons;
 }
