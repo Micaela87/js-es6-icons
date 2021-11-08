@@ -7,6 +7,11 @@
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 10px;
+    background-color: #dddddd;
+}
+
+header {
+    background-color: white;
 }
 
 h1 {
@@ -36,7 +41,6 @@ option {
     justify-content: space-evenly;
     width: 100%;
     height: fit-content;
-    background-color: #dddddd;
 }
 
 .icon-container {
