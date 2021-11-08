@@ -6,9 +6,9 @@ Ciascuna icona ha una proprietà “color”: utilizzare questa proprietà per v
 */
 
 // DOM nodes
-const formOptions = document.querySelectorAll('select');
-
-const iconsContainer = document.querySelector('.container');
+const formOptions = document.querySelectorAll('select'); // dropdown menu
+const iconsContainer = document.querySelector('.container'); // icons' container
+let arrFormattedIcons = []; // empty icon HTML elements collection
 
 // data to be displayed
 const icons = [
@@ -126,40 +126,52 @@ const icons = [
 	}
 ];
 
+// displays all icons when loading the page
+icons.forEach((icon) => generateIcon(icon));
+displayIcons(arrFormattedIcons);
+arrFormattedIcons = [];
 
-
+// adds event on dropdown menu options to filter icons to be displayed
 formOptions.forEach(function(n) {
 	n.addEventListener('change', function() {
 		console.log('you selected me');
 		console.log(n);
-		if (n.value === 'all') {
+		if (this.value === 'all') {
 			icons.forEach((icon) => generateIcon(icon));
+			displayIcons(arrFormattedIcons);
 			arrFormattedIcons = [];
 		} else {
-			const filteredIcons = filterIcons(n.value);
+			const filteredIcons = filterIcons(this.value);
 			filteredIcons.forEach((icon) => generateIcon(icon));
+			displayIcons(arrFormattedIcons);
 			arrFormattedIcons = [];
 		}
-	})
-})
-
-let arrFormattedIcons = [];
+	});
+});
 
 // helper functions
 
-// generates icons
+// generates and displays icons
 function generateIcon(obj) {
+	// creates an HTML string
 	const htmlString = `
 	<div class='icon-container'>
 		<i style='color:${obj.color}' class="${obj.family} ${obj.prefix}${obj.name}"></i>
 		<span>${obj.name.toUpperCase()}</span>
 	</div>
 	`;
+
+	// pushes the string previously created to the general collection above
 	arrFormattedIcons.push(htmlString);
+}
 
-	const finalResult = arrFormattedIcons.join('');
+// displays icons on page
+function displayIcons(arr) {
+	// turns all the elements of the collection in a single string
+	const stringFormattedIcons = arr.join('');
 
-	iconsContainer.innerHTML = finalResult;
+	// prints icons in the collection to the page
+	iconsContainer.innerHTML = stringFormattedIcons;
 }
 
 // filters icons by type
